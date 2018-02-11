@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {LocalStorage} from 'ngx-webstorage';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,20 +7,16 @@ import {Router} from '@angular/router';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+  @LocalStorage()
+  isLogged: boolean;
 
-  query: string;
-
-  constructor(private router: Router) {
+  constructor() {
   }
 
   ngOnInit() {
   }
 
-  onSubmit() {
-    if (this.query && this.query.length > 0) {
-      this.router.navigate(['/search'], {queryParams: {q: this.query}});
-    }
-    this.query = '';
+  logout() {
+    this.isLogged = false;
   }
-
 }

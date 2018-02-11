@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {TransactionService} from '../../services/transaction.service';
 import {HttpClient} from '@angular/common/http';
 import {Subscription} from 'rxjs/Subscription';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -18,7 +17,7 @@ export class TransactionsComponent implements OnInit {
   private subscriber: Subscription;
   page = 0;
 
-  constructor(private transactionService: TransactionService, private http: HttpClient, private route: ActivatedRoute, private router: Router) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
