@@ -9,6 +9,8 @@ import {LocalStorage} from 'ngx-webstorage';
 export class SidebarComponent implements OnInit {
   @LocalStorage()
   isLogged: boolean;
+  @LocalStorage()
+  identity: any;
 
   constructor() {
   }
@@ -18,5 +20,6 @@ export class SidebarComponent implements OnInit {
 
   logout() {
     this.isLogged = false;
+    this.identity = null;
   }
 }

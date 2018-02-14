@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Renderer2} from '@angular/core';
 import {LocalStorage} from 'ngx-webstorage';
 import {Router} from '@angular/router';
+import * as Eos from 'eosjs';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,15 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   @LocalStorage()
   isLogged: boolean;
+  @LocalStorage()
+  identity: any;
+  scatter: any = (<any>window).scatter; // TODO: move to a bigger scope as we will need it everywhere
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private renderer: Renderer2) {
+    renderer.listen('document', 'scatterLoaded', () => {
+        this.loadScatter();
+      }
+    );
   }
 
   ngOnInit() {
@@ -20,8 +28,27 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  loadScatter() {
+    this.scatter = (<any>window).scatter;
+    const network = {host: "testnet1.eos.io", port: 80};
+    const eosOptions = {};
+    this.scatter.eos(Eos.Testnet, network, eosOptions);
+
+  }
+
   login() {
-    this.isLogged = true;
-    this.router.navigate(['/']);
+    const requirements = ['account'];
+    let that = this;
+    this.scatter.getIdentity(requirements).then(
+      function (identity) {
+        console.log(identity);
+        that.identity = identity;
+        that.scatter.useIdentity(identity.hash);
+        that.isLogged = true;
+        that.router.navigate(['/']);
+      }
+    ).catch(e => {
+      console.log(e)
+    });
   }
 }

@@ -2,7 +2,7 @@
 	<div id="page-wrapper">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Dashboard</h1>
+				<h1 class="page-header">{{identity.name}}</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
@@ -12,32 +12,40 @@
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Transactions
+						Messages
 
 						<div class="pull-right">
-							<button type="button" routerLink="/transactions" class="btn btn-outline btn-info btn-xs">
-								View All
+							<button *ngFor="let group of groups" style="margin-right: 5px;" type="button" class="btn btn-outline btn-info btn-xs">
+								{{group._id}} ({{group.count}})
 							</button>
 						</div>
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
-						<app-loading *ngIf="!transactions"></app-loading>
-						<div *ngIf="transactions" class="table-responsive">
+						<app-loading *ngIf="!messages"></app-loading>
+						<div *ngIf="messages" class="table-responsive">
 							<table class="table table-striped">
 								<thead>
 								<tr>
-									<th>#</th>
-									<th>Time</th>
-									<th>Msgs</th>
+									<th>From</th>
+									<th></th>
+									<th>To</th>
+									<th>Amount</th>
+									<th>Date</th>
+									<th>Memo</th>
 								</tr>
 								</thead>
 								<tbody>
-								<tr *ngFor="let transaction of transactions">
-									<td><a routerLink="/transactions/{{transaction.transaction_id}}">{{transaction.transaction_id | slice:0:32}}...</a>
+								<tr *ngFor="let message of messages">
+									<td>{{message.data.from}}</td>
+									<td>
+										<i *ngIf="message.data.from !== identity.name" class="fa fa-long-arrow-right fa-fw" style="color: green"></i>
+										<i *ngIf="message.data.from === identity.name" class="fa fa-long-arrow-right fa-fw" style="color: red"></i>
 									</td>
-									<td>{{transaction.createdAt.sec * 1000 | date:'medium'}}</td>
-									<td>{{transaction.messages.length}}</td>
+									<td>{{message.data.to}}</td>
+									<td>{{message.data.amount}}</td>
+									<td>{{message.createdAt.sec * 1000 | date:'medium'}}</td>
+									<td>{{message.data.memo}}</td>
 								</tr>
 								</tbody>
 							</table>

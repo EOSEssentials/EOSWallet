@@ -2,17 +2,23 @@
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 			<div class="login-panel panel panel-default">
+				<div align="center" style="margin: 5px"><img src="/assets/logo.png" width="100" height="100" /></div>
 				<div class="panel-heading">
-					<h3 class="panel-title">Wallet EOS Login</h3>
+					<h3 class="panel-title" align="center">WalletEOS</h3>
 				</div>
 				<div class="panel-body">
-					<form role="form">
+					<form>
 						<fieldset>
-							<div class="form-group">
-								<input class="form-control" placeholder="Password" name="password" type="password"
-								       value="">
-							</div>
-							<button (click)="login()" class="btn btn-lg btn-success btn-block">Login</button>
+							<button (click)="login()" class="btn btn-lg btn-success btn-block">Login with Scatter</button>
+						</fieldset>
+						<br>
+						<fieldset>
+							<button (click)="login()" class="btn btn-lg btn-warning btn-block">Login with Private Key</button>
+						</fieldset>
+						<br>
+						<br>
+						<fieldset>
+							<button (click)="login()" class="btn btn-lg btn-default btn-block">Create Wallet</button>
 						</fieldset>
 					</form>
 				</div>
