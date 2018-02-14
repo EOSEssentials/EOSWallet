@@ -27,25 +27,25 @@
 							<table class="table table-striped">
 								<thead>
 								<tr>
+									<th>Date</th>
 									<th>From</th>
 									<th></th>
 									<th>To</th>
-									<th>Amount</th>
-									<th>Date</th>
-									<th>Memo</th>
+									<th>Amount (EOS)</th>
+									<th>Tx</th>
 								</tr>
 								</thead>
 								<tbody>
 								<tr *ngFor="let message of messages">
+									<td>{{message.createdAt.sec * 1000 | date:'medium'}}</td>
 									<td>{{message.data.from}}</td>
 									<td>
 										<i *ngIf="message.data.from !== identity.name" class="fa fa-long-arrow-right fa-fw" style="color: green"></i>
 										<i *ngIf="message.data.from === identity.name" class="fa fa-long-arrow-right fa-fw" style="color: red"></i>
 									</td>
 									<td>{{message.data.to}}</td>
-									<td>{{message.data.amount}}</td>
-									<td>{{message.createdAt.sec * 1000 | date:'medium'}}</td>
-									<td>{{message.data.memo}}</td>
+									<td>{{message.data.amount / 1000}}</td>
+									<td>{{message.transaction_id|slice:0:32}}...</td>
 								</tr>
 								</tbody>
 							</table>

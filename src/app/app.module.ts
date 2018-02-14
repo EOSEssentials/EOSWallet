@@ -8,8 +8,6 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {PageComponent} from './components/shared/page/page.component';
 import {NavbarComponent} from './components/shared/page/navbar/navbar.component';
 import {SidebarComponent} from './components/shared/page/sidebar/sidebar.component';
-import {TransactionsComponent} from './components/transactions/transactions.component';
-import {TransactionComponent} from './components/transaction/transaction.component';
 import {DashboardService} from './services/dashboard.service';
 import {FormsModule} from '@angular/forms';
 import {LoadingComponent} from './components/shared/page/loading/loading.component';
@@ -19,12 +17,18 @@ import {JsonPipe} from '@angular/common';
 import {Ng2Webstorage} from 'ngx-webstorage';
 import {LoginComponent} from './components/login/login.component';
 import {AuthGuard} from './guards/auth.guard';
+import { TransferComponent } from './components/transfer/transfer.component';
+import { ActionsComponent } from './components/actions/actions.component';
+import { CurrenciesComponent } from './components/currencies/currencies.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 const appRoutes: Routes = [
   {path: '', component: DashboardComponent, canActivate: [AuthGuard]},
-  {path: 'transactions', component: TransactionsComponent, canActivate: [AuthGuard]},
+  {path: 'transfer', component: TransferComponent, canActivate: [AuthGuard]},
+  {path: 'actions', component: ActionsComponent, canActivate: [AuthGuard]},
+  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'transactions/:id', component: TransactionComponent, canActivate: [AuthGuard]}
+  {path: 'currencies', component: CurrenciesComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -35,10 +39,12 @@ const appRoutes: Routes = [
     NavbarComponent,
     SidebarComponent,
     LoginComponent,
-    TransactionsComponent,
-    TransactionComponent,
     LoadingComponent,
-    LoginComponent
+    LoginComponent,
+    TransferComponent,
+    ActionsComponent,
+    CurrenciesComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
