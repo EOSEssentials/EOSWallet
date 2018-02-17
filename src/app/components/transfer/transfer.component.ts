@@ -7,6 +7,9 @@ import {ScatterService} from '../../services/scatter.service';
   styleUrls: ['./transfer.component.css']
 })
 export class TransferComponent implements OnInit {
+  to: string;
+  amount: number;
+  memo: string;
 
   constructor(private scatterService: ScatterService) {
   }
@@ -14,8 +17,8 @@ export class TransferComponent implements OnInit {
   ngOnInit() {
   }
 
-  transfer() {
-    this.scatterService.transfer('kesarito2', 10, '',
+  transfer(to: string, amount: number, memo: string) {
+    this.scatterService.transfer(to, amount, memo,
       function (transaction) {
         console.log(transaction);
       }, function (error) {

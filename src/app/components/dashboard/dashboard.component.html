@@ -2,10 +2,34 @@
 	<div id="page-wrapper">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">{{identity.name}}</h1>
+				<h1 class="page-header">{{username}}</h1>
 			</div>
 			<!-- /.col-lg-12 -->
 		</div>
+
+		<div class="row">
+			<!-- /.col-lg-12 -->
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Stats
+					</div>
+					<!-- /.panel-heading -->
+					<div class="panel-body">
+						<app-loading *ngIf="!messages"></app-loading>
+						<div class="demo-container">
+							<div id="placeholder" class="demo-placeholder"></div>
+						</div>
+						<!-- /.table-responsive -->
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-lg-6 -->
+		</div>
+
+
 
 		<div class="row">
 			<!-- /.col-lg-12 -->
@@ -40,11 +64,11 @@
 									<td>{{message.createdAt.sec * 1000 | date:'medium'}}</td>
 									<td>{{message.data.from}}</td>
 									<td>
-										<i *ngIf="message.data.from !== identity.name" class="fa fa-long-arrow-right fa-fw" style="color: green"></i>
-										<i *ngIf="message.data.from === identity.name" class="fa fa-long-arrow-right fa-fw" style="color: red"></i>
+										<i *ngIf="message.data.from !== username" class="fa fa-long-arrow-right fa-fw" style="color: green"></i>
+										<i *ngIf="message.data.from === username" class="fa fa-long-arrow-right fa-fw" style="color: red"></i>
 									</td>
 									<td>{{message.data.to}}</td>
-									<td>{{message.data.amount / 1000}}</td>
+									<td>{{message.data.amount / 10000}}</td>
 									<td>{{message.transaction_id|slice:0:32}}...</td>
 								</tr>
 								</tbody>

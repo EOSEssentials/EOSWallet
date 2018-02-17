@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {LocalStorage} from 'ngx-webstorage';
 import * as Eos from 'eosjs';
+import {LocalStorage} from 'ngx-webstorage';
 
 @Injectable()
 export class ScatterService {
@@ -10,6 +10,7 @@ export class ScatterService {
   scatter: any;
 
   load() {
+    console.log(this.identity);
     this.scatter = (<any>window).scatter;
     if (this.identity) {
       this.scatter.useIdentity(this.identity.hash);
@@ -18,29 +19,34 @@ export class ScatterService {
     this.eos = this.scatter.eos(Eos.Testnet, network);
   }
 
-  login(success, error) {
+  login(successCallback, errorCallbak) {
     const requirements = ['account'];
     let that = this;
     this.scatter.getIdentity(requirements).then(
       function (identity) {
-        console.log(identity);
         if (!identity) {
-          return error(null);
+          return errorCallbak(null);
         }
         that.identity = identity;
         that.scatter.useIdentity(identity.hash);
-        success();
+        successCallback();
       }
     ).catch(error => {
-      error(error);
+      errorCallbak(error);
     });
   }
 
   transfer(to: string, amount: number, memo: string = '', successCallback, errorCallback) {
-    this.eos.transfer(this.identity.account.name, to, amount, memo, []).then(transaction => {
-      successCallback(transaction);
-    }).catch(error => {
-      errorCallback(error);
-    });
+    let that = this;
+    this.login(function () {
+        that.eos.transfer(that.identity.account.name, to, amount * 10000, memo, []).then(transaction => {
+          successCallback(transaction);
+        }).catch(error => {
+          errorCallback(error);
+        });
+      }, function (error) {
+        errorCallback(error);
+      }
+    );
   }
 }

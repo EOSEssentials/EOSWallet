@@ -16,21 +16,21 @@
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
-						<form>
+						<form (submit)="transfer(to, amount, memo)">
 							<div class="form-group input-group">
 								<span class="input-group-addon">@</span>
-								<input type="text" class="form-control" placeholder="To">
+								<input class="form-control" id="to" [(ngModel)]="to" name="to" required placeholder="To">
 							</div>
 							<div class="form-group input-group">
 								<span class="input-group-addon">EOS</span>
-								<input type="text" class="form-control" placeholder="amount">
+								<input class="form-control" [(ngModel)]="amount" name="amount" required placeholder="amount">
 							</div>
 							<div class="form-group input-group">
 								<span class="input-group-addon">Message</span>
-								<input type="text" class="form-control" placeholder="">
+								<input class="form-control" placeholder="" [(ngModel)]="memo" name="memo">
 							</div>
 							<div class="form-group input-group">
-								<button (click)="transfer()" class="btn btn-lg btn-success btn-block">Transfer</button>
+								<button type="submit" class="btn btn-lg btn-success btn-block">Transfer</button>
 							</div>
 						</form>
 					</div>
