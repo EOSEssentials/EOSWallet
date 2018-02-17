@@ -13,15 +13,32 @@
 						</fieldset>
 						<br>
 						<fieldset>
-							<button (click)="login()" class="btn btn-lg btn-warning btn-block">Login with Private Key</button>
+							<button class="btn btn-lg btn-warning btn-block disabled">Login with Private Key</button>
 						</fieldset>
 						<br>
 						<br>
 						<fieldset>
-							<button (click)="login()" class="btn btn-lg btn-default btn-block">Create Wallet</button>
+							<button class="btn btn-lg btn-default btn-block disabled">Create Wallet</button>
 						</fieldset>
 					</form>
 				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="unlockScatter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Unlock Scatter</h4>
+			</div>
+			<div class="modal-body">
+				You need to have Scatter installed and unlocked
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>

@@ -21,6 +21,7 @@ import { TransferComponent } from './components/transfer/transfer.component';
 import { ActionsComponent } from './components/actions/actions.component';
 import { CurrenciesComponent } from './components/currencies/currencies.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import {ScatterService} from './services/scatter.service';
 
 const appRoutes: Routes = [
   {path: '', component: DashboardComponent, canActivate: [AuthGuard]},
@@ -56,6 +57,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     DashboardService,
+    ScatterService,
     AuthGuard,
     {provide: JsonPipe, useClass: SafeJsonPipe}
   ],

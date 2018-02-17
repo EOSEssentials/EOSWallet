@@ -11,6 +11,8 @@ export class SidebarComponent implements OnInit {
   isLogged: boolean;
   @LocalStorage()
   identity: any;
+  @LocalStorage()
+  eos: any;
 
   constructor() {
   }
@@ -21,5 +23,6 @@ export class SidebarComponent implements OnInit {
   logout() {
     this.isLogged = false;
     this.identity = null;
+    this.eos = null;
   }
 }

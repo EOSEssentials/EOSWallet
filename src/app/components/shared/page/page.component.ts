@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Renderer2} from '@angular/core';
+import {ScatterService} from '../../../services/scatter.service';
 
 @Component({
   selector: 'app-page',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page.component.css']
 })
 export class PageComponent implements OnInit {
-
-  constructor() { }
+  constructor(private renderer: Renderer2, private scatterService: ScatterService) {
+    renderer.listen('document', 'scatterLoaded', () => {
+        this.scatterService.load();
+      }
+    );
+  }
 
   ngOnInit() {
   }
-
 }

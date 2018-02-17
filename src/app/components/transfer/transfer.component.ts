@@ -1,7 +1,5 @@
-import {Component, OnInit, Renderer2} from '@angular/core';
-import {LocalStorage} from 'ngx-webstorage';
-import {Router} from '@angular/router';
-import * as Eos from 'eosjs';
+import {Component, OnInit} from '@angular/core';
+import {ScatterService} from '../../services/scatter.service';
 
 @Component({
   selector: 'app-transfer',
@@ -9,32 +7,22 @@ import * as Eos from 'eosjs';
   styleUrls: ['./transfer.component.css']
 })
 export class TransferComponent implements OnInit {
-  @LocalStorage()
-  identity: any;
-  scatter: any = (<any>window).scatter; // TODO: move to a bigger scope as we will need it everywhere
 
-  constructor(private router: Router, private renderer: Renderer2) {
-    renderer.listen('document', 'scatterLoaded', () => {
-        this.loadScatter();
-      }
-    );
+  constructor(private scatterService: ScatterService) {
   }
 
   ngOnInit() {
   }
 
-  loadScatter() {
-    this.scatter = (<any>window).scatter;
-    const network = {host: "testnet1.eos.io", port: 80};
-    const eosOptions = {};
-    this.scatter.eos(Eos.Testnet, network, eosOptions);
-
-  }
-
   transfer() {
-    let that = this;
-    // TODO: transfer
-    return;
+    this.scatterService.transfer('kesarito2', 10, '',
+      function (transaction) {
+        console.log(transaction);
+      }, function (error) {
+        $("#errorTransfer").modal();
+        console.log(error);
+      }
+    );
   }
 
 }
