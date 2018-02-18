@@ -10,43 +10,43 @@ export class ScatterService {
   scatter: any;
 
   load() {
-    console.log(this.identity);
+    console.log('loading', this.identity);
+
     this.scatter = (<any>window).scatter;
-    if (this.identity) {
-      this.scatter.useIdentity(this.identity.hash);
-    }
-    const network = {host: "eosio.es", port: 1001}; // TODO: suggest networks
+    (<any>window).scatter = null;
+
+    this.bindIdentity(this.identity);
+
+    const network = {host: "eosio.es", port: 1001}; // TODO: Suggest networks
     this.eos = this.scatter.eos(Eos.Testnet, network);
+
   }
 
-  login(successCallback, errorCallbak) {
+  login(successCallback, errorCallback) {
     const requirements = ['account'];
-    let that = this;
-    this.scatter.getIdentity(requirements).then(
-      function (identity) {
-        if (!identity) {
-          return errorCallbak(null);
-        }
-        that.identity = identity;
-        that.scatter.useIdentity(identity.hash);
+    this.scatter.suggestNetwork().then(() => {
+      this.scatter.getIdentity(requirements).then(identity => {
+        if (!identity) return errorCallback(null);
+        this.bindIdentity(identity);
         successCallback();
-      }
-    ).catch(error => {
-      errorCallbak(error);
-    });
+      })
+      .catch(error => errorCallback(error));
+    }).catch(error => errorCallback(error));
   }
 
   transfer(to: string, amount: number, memo: string = '', successCallback, errorCallback) {
-    let that = this;
-    this.login(function () {
-        that.eos.transfer(that.identity.account.name, to, amount * 10000, memo, []).then(transaction => {
-          successCallback(transaction);
-        }).catch(error => {
-          errorCallback(error);
-        });
-      }, function (error) {
-        errorCallback(error);
-      }
+    this.login(() => {
+      this.eos.transfer(this.identity.account.name, to, amount * 10000, memo)
+          .then(transaction => successCallback(transaction))
+          .catch(error => errorCallback(error));
+      }, (error) => errorCallback(error)
     );
+  }
+
+  private bindIdentity(identity){
+    if(identity){
+      this.identity = identity;
+      this.scatter.useIdentity(identity);
+    }
   }
 }
