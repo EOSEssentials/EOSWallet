@@ -6,9 +6,9 @@ EOS Wallet is a Frontend based on Angular4 that connects to EOS Tracker API.
 📌 Getting Started
 ------------
 
-`git clone git@github.com:EOSEssentials/EOSWallet.git`
-`cd EOSWallet`
-`npm install`
+- `git clone https://github.com/EOSEssentials/EOSWallet.git`
+- `cd EOSWallet`
+- `npm install`
   
 📌 Development server
 ------------
