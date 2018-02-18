@@ -38,6 +38,7 @@
 						Messages
 
 						<div class="pull-right">
+							Account Handler:
 							<select>
 								<option *ngFor="let group of groups" value="{{group._id}}" [selected]="group._id === 'eos'">
 									{{group._id}} ({{group.count}})

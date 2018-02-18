@@ -15,7 +15,7 @@ export class ScatterService {
     if (this.identity) {
       this.scatter.useIdentity(this.identity.hash);
     }
-    const network = {host: "eosio.es", port: 1001};
+    const network = {host: "eosio.es", port: 1001}; // TODO: suggest networks
     this.eos = this.scatter.eos(Eos.Testnet, network);
   }
 
