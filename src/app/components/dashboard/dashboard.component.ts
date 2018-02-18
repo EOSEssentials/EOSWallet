@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(private http: HttpClient, private scatterService: ScatterService) {
     this.alive = true;
-    this.username = this.scatterService.identity.name;
+    this.username = this.scatterService.identity.account.name;
   }
 
   ngOnInit() {
