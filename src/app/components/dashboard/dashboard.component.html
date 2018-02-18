@@ -12,11 +12,10 @@
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Stats
+						Balance
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
-						<app-loading *ngIf="!messages"></app-loading>
 						<div class="demo-container">
 							<div id="placeholder" class="demo-placeholder"></div>
 						</div>
@@ -39,9 +38,11 @@
 						Messages
 
 						<div class="pull-right">
-							<button *ngFor="let group of groups" style="margin-right: 5px;" type="button" class="btn btn-outline btn-info btn-xs">
-								{{group._id}} ({{group.count}})
-							</button>
+							<select>
+								<option *ngFor="let group of groups" value="{{group._id}}" [selected]="group._id === 'eos'">
+									{{group._id}} ({{group.count}})
+								</option>
+							</select>
 						</div>
 					</div>
 					<!-- /.panel-heading -->
