@@ -1,6 +1,6 @@
 {
-  "name": "eos-explorer",
-  "version": "0.0.0",
+  "name": "eos-wallet",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -24,7 +24,7 @@
     "angular2-counto": "^1.2.3",
     "angular2-prettyjson": "^2.0.6",
     "core-js": "^2.4.1",
-    "eosjs": "^6.1.5",
+    "eosjs": "^14.1.1",
     "ngx-webstorage": "^2.0.1",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"

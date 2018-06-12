@@ -8,6 +8,7 @@ export class ScatterService {
   identity: any;
   eos: any;
   scatter: any;
+  network: any;
 
   load() {
     console.log(this.identity);
@@ -15,12 +16,19 @@ export class ScatterService {
     if (this.identity) {
       this.scatter.useIdentity(this.identity.hash);
     }
-    const network = {host: "eosio.es", port: 1001}; // TODO: suggest networks
-    this.eos = this.scatter.eos(Eos.Testnet, network);
+
+    this.network = {
+      blockchain:'eos',
+      host:'node2.liquideos.com',
+      port:8888,
+      chainId:'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
+    };
+    this.eos = this.scatter.eos(this.network, Eos, {}, 'http' );
   }
 
   login(successCallback, errorCallbak) {
-    const requirements = ['account'];
+    const requirements = {accounts:[this.network]};
+
     let that = this;
     this.scatter.getIdentity(requirements).then(
       function (identity) {

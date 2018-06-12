@@ -48,8 +48,8 @@
 					</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
-						<app-loading *ngIf="!messages"></app-loading>
-						<div *ngIf="messages" class="table-responsive">
+						<app-loading *ngIf="!actions"></app-loading>
+						<div *ngIf="actions" class="table-responsive">
 							<table class="table table-striped">
 								<thead>
 								<tr>
@@ -62,7 +62,7 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr *ngFor="let message of messages">
+								<tr *ngFor="let action of actions">
 									<td>{{message.createdAt.sec * 1000 | date:'medium'}}</td>
 									<td>{{message.data.from}}</td>
 									<td>

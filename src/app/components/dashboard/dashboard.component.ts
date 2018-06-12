@@ -11,7 +11,7 @@ import {ScatterService} from '../../services/scatter.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  messages = null;
+  actions = null;
   stats = null;
   groups = null;
   handler = 'eos';
@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(private http: HttpClient, private scatterService: ScatterService) {
     this.alive = true;
-    this.username = this.scatterService.identity.account.name;
+    this.username = this.scatterService.identity.accounts[0].name;
   }
 
   ngOnInit() {
@@ -28,26 +28,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
       .takeWhile(() => this.alive)
       .subscribe(() => {
 
-        this.http.get(environment.apiUrl + '/wallet/messages?scope=' + this.username + '&handler=' + this.handler + '&size=20').subscribe(data => {
-          this.messages = [];
-          for (let transaction of data[1]) {
-            this.messages.push(transaction.message);
-          }
-
+        this.http.get(environment.apiUrl + '/accounts/'+ this.username +'/actions?page=1').subscribe(data => {
+          this.actions = data;
+/*
           this.http.get(environment.apiUrl + '/accounts?name=' + this.username).subscribe(accounts => {
             this.plot(this.messages, accounts[0]);
           });
-          console.log(this.messages);
+          console.log(this.messages); */
         });
       });
-
+/*
     this.http.get(environment.apiUrl + '/wallet/messages/groups?scope=' + this.username).subscribe(data => {
       this.groups = [];
       for (let group of data[1]) {
         this.groups.push(group);
       }
       console.log(this.groups);
-    });
+    }); */
   }
 
   ngOnDestroy() {
