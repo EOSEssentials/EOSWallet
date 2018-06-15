@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import * as Eos from 'eosjs';
 import {LocalStorage} from 'ngx-webstorage';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class ScatterService {
@@ -19,11 +20,11 @@ export class ScatterService {
 
     this.network = {
       blockchain:'eos',
-      host:'api.eosmetal.io',
-      port:18890,
+      host: environment.eosHost,
+      port:environment.eosPort,
       chainId:'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
     };
-    this.eos = this.scatter.eos(this.network, Eos, {}, 'https' );
+    this.eos = this.scatter.eos(this.network, Eos, {}, environment.eosProtocol);
   }
 
   login(successCallback, errorCallbak) {
@@ -42,6 +43,10 @@ export class ScatterService {
     ).catch(error => {
       errorCallbak(error);
     });
+  }
+
+  logout() {
+    //this.scatter.forgetIdentity().then(() => { this.identity = null });
   }
 
   transfer(to: string, amount: number, memo: string = '', successCallback, errorCallback) {

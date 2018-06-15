@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalStorage} from 'ngx-webstorage';
+import {ScatterService} from '../../../../services/scatter.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,13 +11,14 @@ export class SidebarComponent implements OnInit {
   @LocalStorage()
   isLogged: boolean;
 
-  constructor() {
+  constructor(private scatterService: ScatterService) {
   }
 
   ngOnInit() {
   }
 
   logout() {
+    this.scatterService.logout();
     this.isLogged = false;
   }
 }

@@ -39,25 +39,20 @@
 							<table class="table table-striped">
 								<thead>
 								<tr>
-									<th>Date</th>
-									<th>From</th>
-									<th></th>
-									<th>To</th>
-									<th>Amount (EOS)</th>
+									<th>Account</th>
+									<th>Name</th>
 									<th>Tx</th>
 								</tr>
 								</thead>
 								<tbody>
 								<tr *ngFor="let action of actions">
-									<td>{{message.createdAt.sec * 1000 | date:'medium'}}</td>
-									<td>{{message.data.from}}</td>
-									<td>
+									<td>{{action.account}}</td>
+									<td>{{action.name}}</td>
+									<!-- <td>
 										<i *ngIf="message.data.from !== username" class="fa fa-long-arrow-right fa-fw" style="color: green"></i>
 										<i *ngIf="message.data.from === username" class="fa fa-long-arrow-right fa-fw" style="color: red"></i>
-									</td>
-									<td>{{message.data.to}}</td>
-									<td>{{message.data.amount / 10000}}</td>
-									<td>{{message.transaction_id|slice:0:32}}...</td>
+									</td> -->
+									<td>{{action.transaction|slice:0:32}}...</td>
 								</tr>
 								</tbody>
 							</table>
