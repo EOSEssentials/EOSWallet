@@ -23,7 +23,7 @@ export class ScatterService {
       port:8888,
       chainId:'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
     };
-    this.eos = this.scatter.eos(this.network, Eos, {}, 'http' );
+    this.eos = this.scatter.eos(this.network, Eos, {}, 'https' );
   }
 
   login(successCallback, errorCallbak) {
