@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
         this.http.get(environment.apiUrl + '/accounts/'+ this.username +'/actions?page=1').subscribe(data => {
           this.actions = data;
+          console.log(this.actions);
 /*
           this.http.get(environment.apiUrl + '/accounts?name=' + this.username).subscribe(accounts => {
             this.plot(this.messages, accounts[0]);
