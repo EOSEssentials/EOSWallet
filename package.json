@@ -4,11 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
+    "dev": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
@@ -25,7 +27,9 @@
     "angular2-prettyjson": "^2.0.6",
     "core-js": "^2.4.1",
     "eosjs": "^14.1.1",
+    "express": "^4.16.3",
     "ngx-webstorage": "^2.0.1",
+    "path": "^0.12.7",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },

@@ -29,7 +29,7 @@ export class TransferComponent implements OnInit {
       }
     };
 
-    $("#to").easyAutocomplete(options);
+    //$("#to").easyAutocomplete(options);
   }
 
   transfer(to: string, amount: number, memo: string) {
