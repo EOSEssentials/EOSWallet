@@ -19,8 +19,8 @@ export class ScatterService {
 
     this.network = {
       blockchain:'eos',
-      host:'node2.liquideos.com',
-      port:8888,
+      host:'api.eosmetal.io',
+      port:18890,
       chainId:'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
     };
     this.eos = this.scatter.eos(this.network, Eos, {}, 'https' );
